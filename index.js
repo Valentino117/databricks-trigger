@@ -1,17 +1,17 @@
 const express = require('express');
+const cors = require('cors'); // ✅ CORS import
 const axios = require('axios');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Load config from .env
+// ✅ Enable CORS for all routes
+app.use(cors());
+
 const DATABRICKS_TOKEN = process.env.DATABRICKS_TOKEN;
 const DATABRICKS_URL = 'https://dbc-5fa907b7-2ea4.cloud.databricks.com/api/2.1/jobs/run-now';
 const JOB_ID = 1108444824496114;
-
-console.log('Loaded token:', DATABRICKS_TOKEN);
-
 
 app.get('/run-databricks-job', async (req, res) => {
   try {
